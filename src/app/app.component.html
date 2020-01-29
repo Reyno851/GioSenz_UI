@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>GioSenz Map UI</title>
+  </head>
+
+  <body>
+    <!--Title-->
+    <h1>GioSenz Map UI</h1>
+
+    <!-- Create a search bar to search for locations-->
+    <div class="form-group">
+      <label>Enter address: </label>
+      <br />
+      <input
+        type="text"
+        class="form-control"
+        (keydown.enter)="$event.preventDefault()"
+        placeholder="Search Nearest Location"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="text"
+        #search
+      />
+    </div>
+
+    <!--Buttons-->
+    <button mat-button (click)="show_pop_d()">Population Density</button>
+    <button mat-button (click)="show_temp()">Temperature</button>
+    <button mat-button (click)="show_humidity()">Humidity</button>
+    <button mat-button (click)="show_carbon_emissions()">
+      Carbon Emissions
+    </button>
+    <button mat-button>Toggle Heatmap</button>
+    <button mat-button (click)="toggle_truefalse()">True/False Toggle</button>
+    <button mat-button (click)="getStaticMap()">Get Static Map</button>
+    <button mat-button>Test Button</button>
+
+    <br />
+    <!--Map module-->
+    <!--Use (mapClick) instead of (click). Special event mapClick allows lat and lon to be retrieved from the map,
+    instead of the application just perceiving your click as just as click-->
+    <!--Attributes of agm-map can be found here: https://angular-maps.com/api-docs/agm-core/components/agmmap -->
+    <agm-map
+      [latitude]="latitude"
+      [longitude]="longitude"
+      (mapClick)="onChoseLocation($event)"
+      [zoom]="zoom"
+      (mapReady)="initDrawingManager($event)"
+      [fullscreenControl]="true"
+      [mapTypeControl]="true"
+      [controlSize]="25"
+      mapTypeId="roadmap"
+    >
+      <agm-polygon [paths]="paths" (polyClick)="onPolyClick($event)">
+      </agm-polygon>
+
+      <!--ngIf here is used so that marker only appears when locationChosen is true (ie User clicks on a point on the map)-->
+      <agm-marker
+        [latitude]="latitude"
+        [longitude]="longitude"
+        *ngIf="locationChosen"
+        [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)"
+      >
+        <agm-info-window>Location chosen</agm-info-window>
+      </agm-marker>
+
+      <img
+        src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=600x400"
+      />
+    </agm-map>
+
+    <h5>Address: {{ address }}</h5>
+
+    <!-- Can call latitude and longitude of point chosen here-->
+    <div>Latitude: {{ latitude }}</div>
+    <div>Longitude: {{ longitude }}</div>
+  </body>
+</html>

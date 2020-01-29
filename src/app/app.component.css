@@ -1,0 +1,38 @@
+agm-map {
+  height: 400px;
+  background: black;
+}
+
+
+head {
+  background: black;
+}
+
+
+body {
+  background: black;
+  background-color: black;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  background: black;
+  font-size: 40px;
+}
+
+label {
+  color: white;
+}
+
+div {
+  color: black;
+}
+
+h5 {
+  color: white;
+}
+
+* {
+  color: black;
+}
