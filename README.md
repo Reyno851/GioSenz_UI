@@ -1,6 +1,9 @@
-# MyApp
+# GioSenz_UI
+This repository contains files and folders used to create a mapping web application to assist in urban planning using Google Maps APIs.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
+# my-giosenz-app-secure
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1
 
 ## Development server
 
